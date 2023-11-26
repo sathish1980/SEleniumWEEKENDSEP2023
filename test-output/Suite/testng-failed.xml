@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Suite]">
+  <test thread-count="5" name="Test(failed)">
+    <classes>
+      <class name="Testcase.MakeMyTripSearchTestcase">
+        <methods>
+          <include name="quitTheBrowser"/>
+          <include name="CloseADDs"/>
+          <include name="LaunchBrowsers"/>
+          <include name="ValidSearch"/>
+        </methods>
+      </class> <!-- Testcase.MakeMyTripSearchTestcase -->
+    </classes>
+  </test> <!-- Test(failed) -->
+</suite> <!-- Failed suite [Suite] -->

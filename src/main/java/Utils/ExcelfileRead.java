@@ -1,4 +1,4 @@
-package FileHandling;
+package Utils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,8 +14,9 @@ public class ExcelfileRead {
 
 	String filepath =System.getProperty("user.dir")+"//Input//SampleData.xls";
 
-	public void ReadData() throws IOException
+	public Object[][] ReadData() throws IOException
 	{
+		Object[][] excelreadarray = null;
 
 		File F = new File(filepath);
 		FileInputStream FS = new FileInputStream(F);
@@ -23,6 +24,10 @@ public class ExcelfileRead {
 		HSSFWorkbook wbk = new HSSFWorkbook(FS);
 		Sheet sheet = wbk.getSheet("Login");
 		int totalRows =sheet.getPhysicalNumberOfRows();
+		Row row1 = sheet.getRow(1);
+		int totalColumn = row1.getLastCellNum();
+
+		excelreadarray =  new Object[totalRows][totalColumn];
 		for(int i=0;i<totalRows;i++)
 		{
 			Row row = sheet.getRow(i);
@@ -30,12 +35,13 @@ public class ExcelfileRead {
 			for(int j=0;j<totalColumns;j++)
 			{
 				Cell cell = row.getCell(j);
-				System.out.print(GetData(cell));
-				System.out.print("\t");
+				excelreadarray[i][j]=GetData(cell);
+
 			}
-			System.out.println("");
+
 		}
 		FS.close();
+		return excelreadarray;
 	}
 
 	public Object GetData(Cell cellValue)
@@ -49,13 +55,6 @@ public class ExcelfileRead {
 			return DM.formatCellValue(cellValue);
 		}
 		return null;
-	}
-
-
-	public static void main(String[] args) throws IOException {
-		// TODO Auto-generated method stub
-		ExcelfileRead E= new ExcelfileRead();
-		E.ReadData();
 	}
 
 }
