@@ -211,11 +211,7 @@ public class DriverElements {
 		return Destinationfile.toString();
 	}
 
-	public String ExpectedSearchText(String FromCityName, String ToCityName)
-	{
-		return "Flights from "+FromCityName+" to "+ToCityName;
 
-	}
 
 
 

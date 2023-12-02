@@ -4,14 +4,20 @@ import java.io.IOException;
 
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.LogStatus;
+
 import BrowserDriver.Browser;
 import CommonElements.DriverElements;
 import Utils.Propertiesclass;
+import pages.MakeMyTripSearchPage;
+import pages.MakeMyTripSearchResultPage;
 
 
 public class MakeMyTripSearchTestcase  extends Browser{
@@ -39,8 +45,8 @@ public class MakeMyTripSearchTestcase  extends Browser{
 		Thread.sleep(2000);
 	}
 
-	@Test
-	public void ValidSearch()
+	@Test(dataProvider ="Search",dataProviderClass=DataProviderClass.class)
+	public void ValidSearch(String from, String to ,String date)
 	{
 		/*
 		 * Select From location
@@ -49,38 +55,54 @@ public class MakeMyTripSearchTestcase  extends Browser{
 		 * Click Search
 		 * Validate Search result as per search
 		 */
+		/*String from = "MAA";
+		String to = "BLR";
+		String date = "25";*/
+		MakeMyTripSearchPage sp =new MakeMyTripSearchPage(driver);
+		test.log(LogStatus.INFO, "We are in the Search home page");
 
-		c.WaitForElementToBeClickable(driver,By.xpath("//*[@for='fromCity']"),60);
-		c.ClickOnButton(driver.findElement(By.xpath("//*[@for='fromCity']")));
+		String getFromLocation = sp.SelectFromLocation(from);
+		String fromlocationScreenshot = sp.takescreenshot(driver);
+		test.log(LogStatus.INFO, "Select the From Location as: "+from,test.addScreenCapture(fromlocationScreenshot));
 
-		//WaitForElementToBeVisible(driver,By.xpath("(//ul[@role='listbox']//li)[1]"),60);
-		c.WaitForElementToBeVisible(driver,By.xpath("(//ul[@role='listbox']//li)[1]"),60);
+		String getToLocation = sp.SelectToLocation(to);
+		String tolocationScreenshot = sp.takescreenshot(driver);
+		test.log(LogStatus.INFO, "Select the To Location as: "+to,test.addScreenCapture(tolocationScreenshot));
 
-		//Select From location
-		c.SelectTheValueFromList(driver,By.xpath("//ul[@role='listbox']//li"),"MAA");
-		String FromLocation =c.GetAttributeOfelement(driver.findElement(By.xpath("//input[@id='fromCity']")),"value");
-		//SElect To location
-		c.WaitForElementToBeClickable(driver,By.xpath("//*[@for='toCity']"),60);
-		c.ClickOnButton(driver.findElement(By.xpath("//*[@for='toCity']")));
+		sp.SelectDeptaureDate(date);
+		test.log(LogStatus.INFO, "Select the date as: "+date);
+		String dateScreenshot = sp.takescreenshot(driver);
+		test.log(LogStatus.INFO, "Select the date as: "+date,test.addScreenCapture(dateScreenshot));
 
-		//WaitForElementToBeVisible(driver,By.xpath("(//ul[@role='listbox']//li)[1]"),60);
-		c.WaitForElementToBeVisible(driver,By.xpath("(//ul[@role='listbox']//li)[1]"),60);
+		sp.ClickOnSearchButton();
+		test.log(LogStatus.INFO, "Search button is clicked");
 
-		c.SelectTheValueFromList(driver,By.xpath("//ul[@role='listbox']//li"),"PNQ");
-		String toLocation =c.GetAttributeOfelement(driver.findElement(By.xpath("//input[@id='toCity']")),"value");
+		MakeMyTripSearchResultPage srp = new MakeMyTripSearchResultPage(driver);
+		srp.WaitAndSelectOkGotItPopup();
+		test.log(LogStatus.INFO, "OK Got it popup button is clicked");
 
-		//SElect To location
-		c.SelectValueinCalender(driver,"28");
-		//Click Search
-		c.clickOnButton(driver.findElement(By.xpath("//*[@data-cy='submit']//a")));
-		// wait for the popup
-		c.WaitForElementToBeClickable(driver,By.xpath("//*[text()='OKAY, GOT IT!']"),60);
-		c.clickOnButton(driver.findElement(By.xpath("//*[text()='OKAY, GOT IT!']")));
-		String ActualValue = "Flights from Chennai to Bengaluru";
-		// validation
-		Assert.assertEquals(ActualValue,c.ExpectedSearchText(FromLocation, toLocation));
-
+		Assert.assertEquals(srp.GetSearchText(),srp.ExpectedSearchText(getFromLocation, getToLocation));
+		String finalScreenshot = sp.takescreenshot(driver);
+		test.log(LogStatus.INFO, test.addScreenCapture(finalScreenshot));
+		driver.navigate().back();
 	}
+
+
+
+	@AfterMethod
+	public void GetTestcaseStatus(ITestResult result)
+	{
+		if (result.getStatus() == 1) {
+			test.log(LogStatus.PASS, result.getMethod().getMethodName() +" Test Passed");  // new
+		} else if (result.getStatus() == 2) {
+			String screenshotPath = c.takescreenshot(driver);
+			test.log(LogStatus.INFO, result.getMethod().getMethodName() +" Test Error info",test.addScreenCapture(screenshotPath));
+			test.log(LogStatus.FAIL, result.getMethod().getMethodName() +" Test Error");  // new
+		} else if (result.getStatus() == 3) {
+			test.log(LogStatus.SKIP, result.getMethod().getMethodName()+" Test Skipped");  // new
+		}
+	}
+
 	@AfterSuite
 	public void quitTheBrowser()
 	{

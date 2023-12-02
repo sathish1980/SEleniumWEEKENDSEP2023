@@ -8,6 +8,7 @@
           <include name="quitTheBrowser"/>
           <include name="CloseADDs"/>
           <include name="LaunchBrowsers"/>
+          <include name="GetTestcaseStatus"/>
           <include name="ValidSearch"/>
         </methods>
       </class> <!-- Testcase.MakeMyTripSearchTestcase -->

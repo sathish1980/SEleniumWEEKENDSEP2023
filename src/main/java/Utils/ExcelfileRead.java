@@ -12,17 +12,17 @@ import org.apache.poi.ss.usermodel.Sheet;
 
 public class ExcelfileRead {
 
-	String filepath =System.getProperty("user.dir")+"//Input//SampleData.xls";
+	static String filepath =System.getProperty("user.dir")+"//Input//";
 
-	public Object[][] ReadData() throws IOException
+	public static Object[][] ReadData(String fileName, String sheetName) throws IOException
 	{
 		Object[][] excelreadarray = null;
 
-		File F = new File(filepath);
+		File F = new File(filepath+fileName);
 		FileInputStream FS = new FileInputStream(F);
 		//XSSFWorkbook wbk = new XSSFWorkbook(FS);
 		HSSFWorkbook wbk = new HSSFWorkbook(FS);
-		Sheet sheet = wbk.getSheet("Login");
+		Sheet sheet = wbk.getSheet(sheetName);
 		int totalRows =sheet.getPhysicalNumberOfRows();
 		Row row1 = sheet.getRow(1);
 		int totalColumn = row1.getLastCellNum();
@@ -44,7 +44,7 @@ public class ExcelfileRead {
 		return excelreadarray;
 	}
 
-	public Object GetData(Cell cellValue)
+	public static Object GetData(Cell cellValue)
 	{
 		switch(cellValue.getCellType())
 		{

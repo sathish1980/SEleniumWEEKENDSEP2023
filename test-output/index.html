@@ -26,7 +26,7 @@
       <span class="top-banner-title-font">Test results</span>
       <button class="button" id="button">Switch Retro Theme</button> <!-- button -->
       <br/>
-      <span class="top-banner-font-1">1 suite, 1 failed test</span>
+      <span class="top-banner-font-1">1 suite</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -40,7 +40,7 @@
         <div class="rounded-window">
           <div class="suite-header light-rounded-window-top">
             <a href="#" class="navigator-link" panel-name="suite-Suite">
-              <span class="suite-name border-failed">Suite</span>
+              <span class="suite-name border-passed">Suite</span>
             </a> <!-- navigator-link -->
           </div> <!-- suite-header light-rounded-window-top -->
           <div class="navigator-suite-content">
@@ -93,21 +93,31 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">1 method, 1 failed,   </span>
+                    <span class="method-stats">3 methods,   3 passed</span>
                   </li>
                   <li>
-                    <span class="method-list-title failed">Failed methods</span>
-                    <span class="show-or-hide-methods failed">
-                      <a href="#" panel-name="suite-Suite" class="hide-methods failed suite-Suite"> (hide)</a> <!-- hide-methods failed suite-Suite -->
-                      <a href="#" panel-name="suite-Suite" class="show-methods failed suite-Suite"> (show)</a> <!-- show-methods failed suite-Suite -->
+                    <span class="method-list-title passed">Passed methods</span>
+                    <span class="show-or-hide-methods passed">
+                      <a href="#" panel-name="suite-Suite" class="hide-methods passed suite-Suite"> (hide)</a> <!-- hide-methods passed suite-Suite -->
+                      <a href="#" panel-name="suite-Suite" class="show-methods passed suite-Suite"> (show)</a> <!-- show-methods passed suite-Suite -->
                     </span>
-                    <div class="method-list-content failed suite-Suite">
+                    <div class="method-list-content passed suite-Suite">
                       <span>
-                        <img width="3%" src="failed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="Testcase.MakeMyTripSearchTestcase" hash-for-method="ValidSearch">ValidSearch</a> <!-- method navigator-link -->
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="Testcase.MakeMyTripSearchTestcase" hash-for-method="ValidSearch(MAA, PNQ, 20)">ValidSearch(MAA, PNQ, 20)</a> <!-- method navigator-link -->
                       </span>
                       <br/>
-                    </div> <!-- method-list-content failed suite-Suite -->
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="Testcase.MakeMyTripSearchTestcase" hash-for-method="ValidSearch(PNQ, BLR, 14)">ValidSearch(PNQ, BLR, 14)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="Testcase.MakeMyTripSearchTestcase" hash-for-method="ValidSearch(BLR, MAA, 28)">ValidSearch(BLR, MAA, 28)</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content passed suite-Suite -->
                   </li>
                 </ul>
               </div> <!-- suite-section-content -->
@@ -119,26 +129,38 @@
     <div class="wrapper">
       <div class="main-panel-root">
         <div panel-name="suite-Suite" class="panel Suite">
-          <div class="suite-Suite-class-failed">
+          <div class="suite-Suite-class-passed">
             <div class="main-panel-header rounded-window-top">
-              <img src="failed.png"/>
+              <img src="passed.png"/>
               <span class="class-name">Testcase.MakeMyTripSearchTestcase</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="ValidSearch">
-                  </a> <!-- ValidSearch -->
+                  <a name="ValidSearch(MAA, PNQ, 20)">
+                  </a> <!-- ValidSearch(MAA, PNQ, 20) -->
                   <span class="method-name">ValidSearch</span>
-                  <div class="stack-trace">java.lang.AssertionError: expected [Flights from Chennai to Pune] but found [Flights from Chennai to Bengaluru]
-	at Testcase.MakeMyTripSearchTestcase.ValidSearch(MakeMyTripSearchTestcase.java:81)
-	at java.util.ArrayList.forEach(ArrayList.java:1259)
-... Removed 33 stack frames
-</div> <!-- stack-trace -->
+                  <span class="parameters">(MAA, PNQ, 20)</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="ValidSearch(PNQ, BLR, 14)">
+                  </a> <!-- ValidSearch(PNQ, BLR, 14) -->
+                  <span class="method-name">ValidSearch</span>
+                  <span class="parameters">(PNQ, BLR, 14)</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="ValidSearch(BLR, MAA, 28)">
+                  </a> <!-- ValidSearch(BLR, MAA, 28) -->
+                  <span class="method-name">ValidSearch</span>
+                  <span class="parameters">(BLR, MAA, 28)</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
-          </div> <!-- suite-Suite-class-failed -->
+          </div> <!-- suite-Suite-class-passed -->
         </div> <!-- panel Suite -->
         <div panel-name="test-xml-Suite" class="panel">
           <div class="main-panel-header rounded-window-top">
@@ -191,16 +213,24 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(1);
+data.addRows(3);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'ValidSearch')
 data.setCell(0, 2, 'Testcase.MakeMyTripSearchTestcase')
-data.setCell(0, 3, 13175);
+data.setCell(0, 3, 15520);
+data.setCell(1, 0, 1)
+data.setCell(1, 1, 'ValidSearch')
+data.setCell(1, 2, 'Testcase.MakeMyTripSearchTestcase')
+data.setCell(1, 3, 7183);
+data.setCell(2, 0, 2)
+data.setCell(2, 1, 'ValidSearch')
+data.setCell(2, 2, 'Testcase.MakeMyTripSearchTestcase')
+data.setCell(2, 3, 6771);
 window.suiteTableData['Suite']= { tableData: data, tableDiv: 'times-div-Suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 13 seconds</span>
+              <span class="suite-total-time">Total running time: 29 seconds</span>
               <div id="times-div-Suite">
               </div> <!-- times-div-Suite -->
             </div> <!-- times-div -->
@@ -233,17 +263,35 @@ return data;
               </div> <!-- configuration-suite before -->
               <div class="configuration-test before">
                 <span class="method-name">CloseADDs</span>
-                <span class="method-start">5157 ms</span>
+                <span class="method-start">5331 ms</span>
               </div> <!-- configuration-test before -->
               <div class="test-method">
-                <img src="failed.png">
-                </img>
-                <span class="method-name">ValidSearch</span>
-                <span class="method-start">13553 ms</span>
+                <span class="method-name">ValidSearch(MAA, PNQ, 20)</span>
+                <span class="method-start">13936 ms</span>
               </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">GetTestcaseStatus([TestResult name=ValidSearch status=SUCCESS method=MakeMyTripSearchTestcase.ValidSearch(java.lang.St...)</span>
+                <span class="method-start">29460 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="test-method">
+                <span class="method-name">ValidSearch(PNQ, BLR, 14)</span>
+                <span class="method-start">29462 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">ValidSearch(BLR, MAA, 28)</span>
+                <span class="method-start">36647 ms</span>
+              </div> <!-- test-method -->
+              <div class="configuration-method after">
+                <span class="method-name">GetTestcaseStatus([TestResult name=ValidSearch status=SUCCESS method=MakeMyTripSearchTestcase.ValidSearch(java.lang.St...)</span>
+                <span class="method-start">36647 ms</span>
+              </div> <!-- configuration-method after -->
+              <div class="configuration-method after">
+                <span class="method-name">GetTestcaseStatus([TestResult name=ValidSearch status=SUCCESS method=MakeMyTripSearchTestcase.ValidSearch(java.lang.St...)</span>
+                <span class="method-start">43419 ms</span>
+              </div> <!-- configuration-method after -->
               <div class="configuration-suite after">
                 <span class="method-name">quitTheBrowser</span>
-                <span class="method-start">26750 ms</span>
+                <span class="method-start">43441 ms</span>
               </div> <!-- configuration-suite after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
